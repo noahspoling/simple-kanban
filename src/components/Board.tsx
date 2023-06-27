@@ -12,7 +12,18 @@ export const Board = (props: BoardProps) => {
         [], [], [], []
     ])
     const [nextTaskId, setNextTaskId] = React.useState(0);
-    const [tasks, setTasks] = React.useState<Task[]>([])
+    const [tasks, setTasks] = React.useState(() => {
+        const tasksJson = localStorage.getItem("tasks");
+
+        if(tasksJson) {
+            const tasksArray = JSON.parse(tasksJson);
+            const tasksObj = tasksArray.map((task: any) => new Task(task.taskId, task.columnId, task.taskName));
+            return tasksObj
+        }
+        else {
+            return []
+        }
+    })
 
     React.useEffect(() => {
         console.log("Save")
@@ -33,7 +44,7 @@ export const Board = (props: BoardProps) => {
     };
 
     const moveTask = (taskId: number, columnId: number) => {
-        setTasks(tasks.map(task =>
+        setTasks(tasks.map((task: any) =>
             task.getTaskId() === taskId
             ? new Task(taskId, columnId, task.getTaskName())
             : task
@@ -41,11 +52,11 @@ export const Board = (props: BoardProps) => {
     };
 
     const deleteTask = (taskId: number) => {
-        setTasks(tasks.filter(task => task.getTaskId() !== taskId))
+        setTasks(tasks.filter((task: any) => task.getTaskId() !== taskId))
     };
 
     const updateTask = (taskId: number, taskName: string) => {
-        setTasks(tasks.map(task =>
+        setTasks(tasks.map((task: any) =>
             task.getTaskId() === taskId
             ? new Task(taskId, task.getColumnId(), taskName)
             : task
@@ -63,7 +74,7 @@ export const Board = (props: BoardProps) => {
 
         if(tasksJson) {
             const tasksArray = JSON.parse(tasksJson);
-            const tasksObj = tasksArray.map((task: Task) => new Task(task.getTaskId(), task.getColumnId(), task.getTaskName()))
+            const tasksObj = tasksArray.map((task: Task) => new Task(task.taskId, task.columnId, task.taskName))
             setTasks(tasksObj)
             setNextTaskId(tasks.length)
         }
@@ -106,7 +117,7 @@ export const Board = (props: BoardProps) => {
                             columnId={column.columnId}
                             columnName={column.columnName}
                             columnColor={column.columnColor}
-                            tasks={tasks.filter(task => task.getColumnId() === parseInt(columnId))}
+                            tasks={tasks.filter((task: any) => task.getColumnId() === parseInt(columnId))}
                             addTask={addTask}
                             moveTask={moveTask}
                             deleteTask={deleteTask}
