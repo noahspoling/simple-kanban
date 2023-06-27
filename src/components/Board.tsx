@@ -118,7 +118,7 @@ export const Board = (props: BoardProps) => {
             {Object.keys(board.columns).map((columnId, index) => {
                 const column = board.columns[columnId];
                 return (
-                    <div className="md:max-w-[24%]" key={index}>
+                    <div className="md:min-w-[24%]" key={index}>
                         <Column
                             columnId={column.columnId}
                             columnName={column.columnName}
