@@ -2,6 +2,9 @@ import React from "react";
 import { Task } from "../models/Task"
 import Popup from "./AddPopup";
 import { TaskItem } from "./TaskItem"
+
+import {BiMessageSquareAdd, BiMessageSquareX} from "react-icons/bi"
+
 type ColumnProps = {
     columnId: number;
     columnName: string;
@@ -60,11 +63,12 @@ export const Column = (props: ColumnProps) => {
                         <p className=" text-2xl text-center">{props.columnName}</p>
                         <button className={`flex items-center justify-center rounded-md text-xl ${variant.bgHover} w-5 h-5`}
                             onClick={handleOpenModal}>
-                            +
+                            <BiMessageSquareAdd/>
                         </button>
                     </div>
                     <Popup isOpen={modalOpen} columnId={props.columnId} onClose={handleCloseModal} addTask={props.addTask}></Popup>
                 </div>
+
                 <div className={`overflow-auto ${variant.bgAccent} rounded-br-sm rounded-bl-sm h-50`}>
                     <ul className="p-2">
                         {props.tasks.map(task => {
@@ -80,6 +84,7 @@ export const Column = (props: ColumnProps) => {
                         })}
                     </ul>
                 </div>
+
             </div>  
             
         </>
