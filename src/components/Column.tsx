@@ -56,7 +56,7 @@ export const Column = (props: ColumnProps) => {
         <>
             <div>
                 <div className={`${variant.bg} rounded-tl-md rounded-tr-md px-5 py-2`}>
-                    <div className="md:flex justify-between items-center">
+                    <div className="flex justify-between items-center">
                         <p className=" text-2xl text-center">{props.columnName}</p>
                         <button className={`flex items-center justify-center rounded-md text-xl ${variant.bgHover} w-5 h-5`}
                             onClick={handleOpenModal}>
@@ -65,7 +65,7 @@ export const Column = (props: ColumnProps) => {
                     </div>
                     <Popup isOpen={modalOpen} columnId={props.columnId} onClose={handleCloseModal} addTask={props.addTask}></Popup>
                 </div>
-                <div className={`overflow-auto ${variant.bgAccent} h-50`}>
+                <div className={`overflow-auto ${variant.bgAccent} rounded-br-sm rounded-bl-sm h-50`}>
                     <ul className="p-2">
                         {props.tasks.map(task => {
                             return (

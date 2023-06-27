@@ -26,7 +26,7 @@ export const TaskItem = (props: TaskProps) => {
         <div className={`${props.variant.bg} mb-2 p-2 rounded-md`}>
             <div className="flex justify-between items-center">
                 <p
-                    className="text-xl"
+                    className="text-xl overflow-auto"
                 >{props.task.getTaskName()}</p>
                 <button className={`flex items-center justify-center rounded-md text-sm ${props.variant.bgHover} w-5 h-5`}
                     onClick={handleDeleteEvent}
@@ -38,14 +38,14 @@ export const TaskItem = (props: TaskProps) => {
                 {props.task.getColumnId() !== 0 &&
                     <button
                     onClick={handleMoveBack}
-                    className={`${props.variant.bgHover} rounded-sm`}
+                    className={`${props.variant.bgHover} rounded-md p-2`}
                     >Back</button>
                 }
                 
                 {props.task.getColumnId() !==3 &&
                     <button
                     onClick={handleMoveForward}
-                    className={`${props.variant.bgHover} rounded-sm`}
+                    className={`${props.variant.bgHover} rounded-md p-2`}
                     >Forward</button>
                 }
             </div>

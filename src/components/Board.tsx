@@ -73,8 +73,14 @@ export const Board = (props: BoardProps) => {
         const tasksJson = localStorage.getItem("tasks");
 
         if(tasksJson) {
+            let i : number
+            i = 0;
             const tasksArray = JSON.parse(tasksJson);
-            const tasksObj = tasksArray.map((task: Task) => new Task(task.taskId, task.columnId, task.taskName))
+            const tasksObj = tasksArray.map((task: Task) => {
+                const taskM = new Task(i, task.columnId, task.taskName)
+                i++;
+                return taskM;
+            })
             setTasks(tasksObj)
             setNextTaskId(tasks.length)
         }
@@ -108,11 +114,11 @@ export const Board = (props: BoardProps) => {
 
     return(
         <>
-        <div className="flex flex-col sm:flex-row sm:flex-0 gap-4 md:justify-center mx-5">
+        <div className="flex flex-col sm:flex-row sm:flex-1 gap-5 justify-center mx-5">
             {Object.keys(board.columns).map((columnId, index) => {
                 const column = board.columns[columnId];
                 return (
-                    <div className="w-full" key={index}>
+                    <div className="md:max-w-[24%]" key={index}>
                         <Column
                             columnId={column.columnId}
                             columnName={column.columnName}
