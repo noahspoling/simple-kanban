@@ -36,16 +36,16 @@ export const TaskItem = (props: TaskProps) => {
                     onClick={handleMoveBack}
                     className={`${props.variant.bgHover} rounded-md p-2`}
                     >
-                        <BiLeftArrowAlt/>
+                        <BiLeftArrowAlt size={24}/>
                     </button>
                 }
-                <button className={`flex items-center justify-center rounded-md text-sm ${props.variant.bgHover} w-5 h-5`}>
-                    <BiMessageEdit/>
+                <button className={`flex items-center justify-center rounded-md text-sm ${props.variant.bgHover} p-2`}>
+                    <BiMessageEdit size={24}/>
                 </button>
-                <button className={`flex items-center justify-center rounded-md text-sm ${props.variant.bgHover} w-5 h-5`}
+                <button className={`flex items-center justify-center rounded-md text-sm ${props.variant.bgHover} p-2`}
                     onClick={handleDeleteEvent}
                 >
-                   <BiMessageSquareX/>
+                   <BiMessageSquareX size={24}/>
                 </button>
                 
                 {props.task.getColumnId() !==3 &&
@@ -53,7 +53,7 @@ export const TaskItem = (props: TaskProps) => {
                     onClick={handleMoveForward}
                     className={`${props.variant.bgHover} rounded-md p-2`}
                     >
-                        <BiRightArrowAlt/>
+                        <BiRightArrowAlt size={24}/>
                 </button>
                 }
             </div>
