@@ -7,13 +7,25 @@ type BoardProps = {
 }
 
 export const Board = (props: BoardProps) => {
+    
     const [columns, setColumns] = React.useState([
         [], [], [], []
     ])
-    const [nextTaskId, setNextTaskId] = React.useState(1);
-
+    const [nextTaskId, setNextTaskId] = React.useState(0);
     const [tasks, setTasks] = React.useState<Task[]>([])
 
+    React.useEffect(() => {
+        console.log("Save")
+        console.log(tasks);
+        saveTasks();
+      }, [tasks]);
+    
+    React.useEffect(() => {
+        console.log("Load")
+        console.log(tasks);
+        loadTasks();
+    }, []);
+      
     const addTask = (columnId: number, taskName: string) => {
         const newTask = new Task(nextTaskId, columnId, taskName);
         setTasks([...tasks, newTask]);
@@ -39,6 +51,24 @@ export const Board = (props: BoardProps) => {
             : task
         ));
     };
+
+    const saveTasks = () => {
+        const tasksJson = JSON.stringify(tasks);
+
+        localStorage.setItem("tasks", tasksJson);
+    };
+
+    const loadTasks = () => {
+        const tasksJson = localStorage.getItem("tasks");
+
+        if(tasksJson) {
+            const tasksArray = JSON.parse(tasksJson);
+            const tasksObj = tasksArray.map((task: Task) => new Task(task.getTaskId(), task.getColumnId(), task.getTaskName()))
+            setTasks(tasksObj)
+            setNextTaskId(tasks.length)
+        }
+    }
+
     
     const board = {
         columns: {
