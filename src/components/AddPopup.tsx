@@ -36,7 +36,7 @@ const MyModal = (props : ModalProps) => {
   >
     <div className="bg-white p-6 rounded shadow-lg w-1/2 mt-20">
       <h2 className="text-2xl font-bold text-black mb-4">Add Task</h2>
-      <form onSubmit={handleSubmit = e => {}}>
+      <form onSubmit={handleSubmit}>
         <label className="text-black px-2">
           Task Name
         </label>
