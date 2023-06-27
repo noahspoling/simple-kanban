@@ -12,17 +12,7 @@ export const Board = (props: BoardProps) => {
     ])
     const [nextTaskId, setNextTaskId] = React.useState(1);
 
-    const [tasks, setTasks] = React.useState<Task[]>([
-        new Task(1, 0, "Sleep"),
-        new Task(2, 1, "Run"),
-        new Task(3, 2, "Eat"),
-        new Task(4, 3, "Other Task"),
-        new Task(5, 1, "Read"),
-        new Task(6, 1, "Task #1"),
-        new Task(7, 2, "Task #2"),
-        new Task(8, 3, "Task #3"),
-        new Task(9, 0, "Task #4"),
-    ])
+    const [tasks, setTasks] = React.useState<Task[]>([])
 
     const addTask = (columnId: number, taskName: string) => {
         const newTask = new Task(nextTaskId, columnId, taskName);
@@ -32,7 +22,7 @@ export const Board = (props: BoardProps) => {
 
     const moveTask = (taskId: number, columnId: number) => {
         setTasks(tasks.map(task =>
-            task.getColumnId() === taskId
+            task.getTaskId() === taskId
             ? new Task(taskId, columnId, task.getTaskName())
             : task
         ));
@@ -43,7 +33,7 @@ export const Board = (props: BoardProps) => {
     };
 
     const updateTask = (taskId: number, taskName: string) => {
-        setTasks(tasks.filter(task =>
+        setTasks(tasks.map(task =>
             task.getTaskId() === taskId
             ? new Task(taskId, task.getColumnId(), taskName)
             : task

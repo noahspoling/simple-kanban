@@ -14,8 +14,10 @@ const MyModal = (props : ModalProps) => {
   const [taskName, setTaskName] = React.useState("")
 
   const handleSubmit = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("Test")
     event.preventDefault();
-    props.onClose
+    handleAddTask()
+    props.onClose()
   }
 
   const handleTaskNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
