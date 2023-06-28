@@ -3,7 +3,7 @@ import { Task } from "../models/Task"
 import Popup from "./AddPopup";
 import { TaskItem } from "./TaskItem"
 
-import {BiMessageSquareAdd, BiMessageSquareX} from "react-icons/bi"
+import {BiMessageSquareAdd} from "react-icons/bi"
 
 type ColumnProps = {
     columnId: number;

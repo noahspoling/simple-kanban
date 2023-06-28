@@ -2,15 +2,10 @@ import React from "react"
 import { Column } from "./Column"
 import { Task } from "../models/Task"
 
-type BoardProps = {
-    boardName: string
-}
 
-export const Board = (props: BoardProps) => {
+export const Board = () => {
     
-    const [columns, setColumns] = React.useState([
-        [], [], [], []
-    ])
+
     const [nextTaskId, setNextTaskId] = React.useState(0);
     const [tasks, setTasks] = React.useState(() => {
         const tasksJson = localStorage.getItem("tasks");
@@ -86,25 +81,38 @@ export const Board = (props: BoardProps) => {
         }
     }
 
+    type ColumnType = {
+        columnId: number
+        columnName: string
+        columnColor: "blue" | "yellow" | "red" | "green"
+      }
+      
+      type BoardType = {
+        columns : {
+            [key: string]: ColumnType
+        }
+        
+      }
+      
     
-    const board = {
+    const board : BoardType = {
         columns: {
-            0: {
+            "0": {
                 columnId: 0,
                 columnName: "Todo",
                 columnColor: "blue"
             },
-            1: {
+            "1": {
                 columnId: 1,
                 columnName: "Working",
                 columnColor: "yellow"
             },
-            2: {
+            "2": {
                 columnId: 2,
                 columnName: "Stuck",
                 columnColor: "red"
             },
-            3: {
+            "3": {
                 columnId: 3,
                 columnName: "Done",
                 columnColor: "green"
@@ -116,14 +124,14 @@ export const Board = (props: BoardProps) => {
         <>
         <div className="flex flex-col sm:flex-row sm:flex-1 gap-5 justify-center mx-5">
             {Object.keys(board.columns).map((columnId, index) => {
-                const column = board.columns[columnId];
+                const column = board.columns[Number(columnId)];
                 return (
                     <div className="md:min-w-[24%]" key={index}>
                         <Column
                             columnId={column.columnId}
                             columnName={column.columnName}
                             columnColor={column.columnColor}
-                            tasks={tasks.filter((task: any) => task.getColumnId() === parseInt(columnId))}
+                            tasks={tasks.filter((task: any) => task.getColumnId() === Number(columnId))}
                             addTask={addTask}
                             moveTask={moveTask}
                             deleteTask={deleteTask}
