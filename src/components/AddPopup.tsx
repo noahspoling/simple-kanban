@@ -13,7 +13,7 @@ Modal.setAppElement('#root');
 const MyModal = (props : ModalProps) => {
   const [taskName, setTaskName] = React.useState("")
 
-  const handleSubmit = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSubmit = (event: React.FormEvent) => {
     console.log("Test")
     event.preventDefault();
     handleAddTask()
